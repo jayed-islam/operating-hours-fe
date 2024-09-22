@@ -23,10 +23,8 @@ const PanelLayout = ({ children }: Props) => {
         <div className="">appbar</div>
 
         {/* Page Content */}
-        <div className="">
-          <div className="mt-16 m-5 bg-white border-t border-l border-r border-gray-200 shadow">
-            {children}
-          </div>
+        <div className="mt-16 m-5 bg-black border-t border-l border-r border-gray-200 shadow">
+          {children}
         </div>
       </div>
     </div>
