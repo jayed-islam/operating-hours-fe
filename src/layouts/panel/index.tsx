@@ -24,7 +24,7 @@ const PanelLayout = ({ children }: Props) => {
 
         {/* Page Content */}
         <div className="">
-          <div className="p-5 mt-16 m-5 bg-white rounded-t-3xl border-t border-l border-r border-gray-200 shadow">
+          <div className="mt-16 m-5 bg-white border-t border-l border-r border-gray-200 shadow">
             {children}
           </div>
         </div>
