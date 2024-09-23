@@ -17,6 +17,7 @@ const OperatingHoursView = () => {
   return (
     <Box
       sx={{
+        bgcolor: "#fff",
         width: "100%",
       }}
     >

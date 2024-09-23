@@ -15,15 +15,16 @@ const PanelLayout = ({ children }: Props) => {
   };
 
   return (
-    <div className="flex h-screen bg-[#f5f7f9]">
+    <div className="flex h-screen ">
       <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
 
       <div className="flex-1">
-        {/* App Bar */}
-        <div className="">appbar</div>
+        <div className="h-16 w-full fixed top-0 pb-5 bg-[#f5f7f9] z-20">
+          <div className="bg-[#dce9ff] h-12 w-full"></div>
+        </div>
 
         {/* Page Content */}
-        <div className="mt-16 m-5 bg-black border-t border-l border-r border-gray-200 shadow">
+        <div className="mt-16 m-5 border-t border-l border-r border-gray-200">
           {children}
         </div>
       </div>
