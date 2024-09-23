@@ -14,7 +14,11 @@ interface Props {
 }
 
 const OperatingHoursSlider = ({ weekday, index }: Props) => {
-  const [value, setValue] = useState<number[]>([index + 1, index + 5]);
+  const isWeekEnd = index === 5 || index === 6;
+  const [value, setValue] = useState<number[]>([
+    isWeekEnd ? 0 : index + 1,
+    isWeekEnd ? 0 : index + 7,
+  ]);
   const [showDelete, setShowDelete] = useState(false);
 
   const minDistance = 1.5;
@@ -63,6 +67,7 @@ const OperatingHoursSlider = ({ weekday, index }: Props) => {
       alignItems="start"
       sx={{
         width: "100%",
+        // minWidth: "700px",
         height: "6.50rem",
         mb: "0.75rem",
       }}
@@ -77,7 +82,8 @@ const OperatingHoursSlider = ({ weekday, index }: Props) => {
             fontSize: "0.8125rem",
             fontWeight: 500,
             lineHeight: "1.25rem",
-            color: "#232F40",
+            // color: "#232F40",
+            color: isShowDeleteButton && !isWeekEnd ? "#232F40" : "#7B8594",
           }}
         >
           {weekday}
@@ -205,21 +211,17 @@ const OperatingHoursSlider = ({ weekday, index }: Props) => {
         </Tooltip>
 
         {/* add time period button */}
+
         <Tooltip title="Add new time period" arrow>
           <div
-            style={{
-              position: "absolute",
-              top: "75%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              display: !isShowDeleteButton ? "flex" : "none",
-              justifyContent: "center",
-              alignItems: "center",
-              opacity: showDelete ? 1 : 0,
-              transition: "opacity 0.3s ease",
-              zIndex: 9999,
-              cursor: "pointer",
-            }}
+            className={`absolute top-[75%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex 
+                ${isShowDeleteButton ? "hidden" : "flex"} 
+                justify-center items-center 
+                transition-opacity duration-300 
+                group-hover:opacity-100 opacity-0 ${
+                  showDelete ? "opacity-100" : "opacity-0"
+                } 
+                z-50 cursor-pointer`}
           >
             <ActionButton imagePath={plusIcon} onClick={handleAddLine} />
           </div>
@@ -233,12 +235,24 @@ const OperatingHoursSlider = ({ weekday, index }: Props) => {
             showDelete ? "opacity-0" : "opacity-100"
           } transition-opacity duration-300 ease-in-out`}
         >
-          <Typography variant="subtitle2" fontWeight={500}>
-            I&apos;m offline{" "}
-            <span className="font-medium text-gray-400">
-              (hover to add operating hours)
-            </span>
-          </Typography>
+          {isWeekEnd ? (
+            <Typography
+              sx={{
+                color: "#425066",
+                fontSize: " 0.8125rem",
+                fontWeight: 600,
+              }}
+            >
+              Business offline
+            </Typography>
+          ) : (
+            <Typography variant="subtitle2" fontWeight={500}>
+              I&apos;m offline{" "}
+              <span className="font-medium text-gray-400">
+                (hover to add operating hours)
+              </span>
+            </Typography>
+          )}
         </div>
       </div>
     </Stack>
